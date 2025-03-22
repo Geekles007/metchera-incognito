@@ -1,103 +1,354 @@
-import Image from "next/image";
+'use client';
+
+import {
+  ClockIcon,
+  CreditCardIcon,
+  DocumentTextIcon,
+  EnvelopeIcon,
+  ExclamationTriangleIcon,
+  InformationCircleIcon,
+  TrashIcon,
+  UserGroupIcon,
+  UserIcon,
+  UserPlusIcon
+} from '@heroicons/react/24/outline';
+import Link from 'next/link';
+import { useState } from 'react';
+import { Toaster } from 'react-hot-toast';
+import AutoDeleteControls from '../components/AutoDeleteControls';
+import BankingDetails from '../components/BankingDetails';
+import DocumentSelector from '../components/DocumentSelector';
+import DocumentViewer from '../components/DocumentViewer';
+import GoogleAds from '../components/GoogleAds';
+import IdentityCard from '../components/IdentityCard';
+import ResponsiveDataTable from '../components/ResponsiveDataTable';
+import SocialMediaProfiles from '../components/SocialMediaProfiles';
+import TempEmailAccess from '../components/TempEmailAccess';
+import Button from '../components/ui/Button';
+import Card, { CardContent, CardDescription, CardTitle } from '../components/ui/Card';
+import { useIdentity } from '../contexts/IdentityContext';
+import { downloadIdentityAsJSON } from '../lib/downloadUtils';
+import { DocumentType } from '../lib/identityGenerator';
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+  const { 
+    currentIdentity, 
+    recentIdentities, 
+    loading, 
+    error, 
+    generateIdentity, 
+    clearCurrentIdentity,
+    isFirestoreConnected,
+    getIdentity,
+    updateIdentity
+  } = useIdentity();
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+  const [showRecent, setShowRecent] = useState(false);
+  const [activeTab, setActiveTab] = useState<'identity' | 'documents' | 'social' | 'email' | 'banking' | 'auto-delete'>('identity');
+  
+  const handleGenerateDocument = (documentType: DocumentType) => {
+    generateIdentity(documentType);
+  };
+
+  const handleIdentityUpdated = (updatedIdentity: any) => {
+    // Update the identity in the context
+    if (updatedIdentity && updatedIdentity.id === currentIdentity?.id) {
+      updateIdentity(updatedIdentity);
+    }
+  };
+
+  const handleDownloadIdentity = () => {
+    if (currentIdentity) {
+      downloadIdentityAsJSON(currentIdentity);
+    }
+  };
+
+  return (
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+      <Toaster position="top-right" />
+      
+      <header className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 shadow-sm">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+          <div className="flex justify-between items-center">
+            <div className="flex items-center">
+              <UserIcon className="h-8 w-8 text-primary mr-3" />
+              <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Metchera ID Generator</h1>
+            </div>
+            <div className="flex items-center space-x-4">
+              <Link href="/validate">
+                <Button variant="outline" leftIcon={<DocumentTextIcon className="h-5 w-5" />}>
+                  Validate QR
+                </Button>
+              </Link>
+              <Link href="/about">
+                <Button variant="ghost" leftIcon={<InformationCircleIcon className="h-5 w-5" />}>
+                  About
+                </Button>
+              </Link>
+            </div>
+          </div>
         </div>
+      </header>
+
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {!isFirestoreConnected && (
+          <div className="mb-6 p-4 bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-md flex items-start gap-3">
+            <ExclamationTriangleIcon className="h-5 w-5 text-yellow-600 flex-shrink-0 mt-0.5" />
+            <div>
+              <h3 className="font-medium text-yellow-800 dark:text-yellow-400">Demo Mode Active</h3>
+              <p className="text-sm text-yellow-700 dark:text-yellow-500 mt-1">
+                Firebase connection unavailable. Using local storage instead. Your identities will only be saved in this browser and may be lost when clearing browser data.
+              </p>
+              <p className="text-xs text-yellow-600 dark:text-yellow-600 mt-2">
+                To use the full version, please configure your Firebase credentials in the .env.local file.
+              </p>
+            </div>
+          </div>
+        )}
+
+        {/* Hero section */}
+        <section className="mb-12">
+          <div className="text-center mb-8">
+            <h2 className="text-3xl font-extrabold text-gray-900 dark:text-white sm:text-4xl">
+              Generate Comprehensive Identity Profiles
+            </h2>
+            <p className="mt-4 text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+              Create realistic temporary identities with names, addresses, official documents, social media profiles, 
+              temporary email access, and banking details for testing. Perfect for development, privacy, or any situation 
+              where you need complete temporary identity profiles.
+            </p>
+          </div>
+
+          <div className="flex justify-center mb-8 space-x-4">
+            <Button
+              size="lg"
+              leftIcon={<UserPlusIcon className="h-5 w-5" />}
+              onClick={() => generateIdentity()}
+              isLoading={loading}
+            >
+              Generate New Identity
+            </Button>
+            <Button
+              size="lg"
+              variant="outline"
+              leftIcon={<ClockIcon className="h-5 w-5" />}
+              onClick={() => setShowRecent(!showRecent)}
+            >
+              {showRecent ? 'Hide Recent' : 'Show Recent Identities'}
+            </Button>
+          </div>
+          
+          {/* Tab Selection */}
+          {currentIdentity && (
+            <div className="flex justify-center mb-6 border-b border-gray-200 dark:border-gray-700 overflow-x-auto">
+              <button
+                className={`px-4 py-2 font-medium text-sm flex items-center ${
+                  activeTab === 'identity'
+                    ? 'text-primary border-b-2 border-primary'
+                    : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300'
+                }`}
+                onClick={() => setActiveTab('identity')}
+              >
+                <UserIcon className="h-4 w-4 mr-1" />
+                Identity
+              </button>
+              <button
+                className={`px-4 py-2 font-medium text-sm flex items-center ${
+                  activeTab === 'documents'
+                    ? 'text-primary border-b-2 border-primary'
+                    : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300'
+                }`}
+                onClick={() => setActiveTab('documents')}
+              >
+                <DocumentTextIcon className="h-4 w-4 mr-1" />
+                Documents
+              </button>
+              <button
+                className={`px-4 py-2 font-medium text-sm flex items-center ${
+                  activeTab === 'social'
+                    ? 'text-primary border-b-2 border-primary'
+                    : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300'
+                }`}
+                onClick={() => setActiveTab('social')}
+              >
+                <UserGroupIcon className="h-4 w-4 mr-1" />
+                Social Media
+              </button>
+              <button
+                className={`px-4 py-2 font-medium text-sm flex items-center ${
+                  activeTab === 'email'
+                    ? 'text-primary border-b-2 border-primary'
+                    : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300'
+                }`}
+                onClick={() => setActiveTab('email')}
+              >
+                <EnvelopeIcon className="h-4 w-4 mr-1" />
+                Email
+              </button>
+              <button
+                className={`px-4 py-2 font-medium text-sm flex items-center ${
+                  activeTab === 'banking'
+                    ? 'text-primary border-b-2 border-primary'
+                    : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300'
+                }`}
+                onClick={() => setActiveTab('banking')}
+              >
+                <CreditCardIcon className="h-4 w-4 mr-1" />
+                Banking
+              </button>
+              <button
+                className={`px-4 py-2 font-medium text-sm flex items-center ${
+                  activeTab === 'auto-delete'
+                    ? 'text-primary border-b-2 border-primary'
+                    : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300'
+                }`}
+                onClick={() => setActiveTab('auto-delete')}
+              >
+                <TrashIcon className="h-4 w-4 mr-1" />
+                Auto-Delete
+              </button>
+            </div>
+          )}
+        </section>
+
+        {/* Google Ad - Top Banner */}
+        <GoogleAds adPosition="content" className="mb-8" />
+
+        {/* Current identity or document section */}
+        <section className="mb-12">
+          {currentIdentity ? (
+            <div className="animate-fadeIn">
+              {activeTab === 'identity' ? (
+                <>
+                  <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">
+                    Your Generated Identity
+                  </h3>
+                  <IdentityCard identity={currentIdentity} />
+                </>
+              ) : activeTab === 'documents' ? (
+                <>
+                  <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">
+                    Official Documents
+                  </h3>
+                  {currentIdentity.documentType ? (
+                    <DocumentViewer identity={currentIdentity} />
+                  ) : (
+                    <DocumentSelector 
+                      onSelect={handleGenerateDocument}
+                      isLoading={loading}
+                    />
+                  )}
+                </>
+              ) : activeTab === 'social' ? (
+                <>
+                  <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">
+                    Social Media Profiles
+                  </h3>
+                  <SocialMediaProfiles identity={currentIdentity} />
+                </>
+              ) : activeTab === 'email' ? (
+                <>
+                  <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">
+                    Temporary Email Access
+                  </h3>
+                  <TempEmailAccess identity={currentIdentity} />
+                </>
+              ) : activeTab === 'banking' ? (
+                <>
+                  <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">
+                    Banking Details
+                  </h3>
+                  <BankingDetails identity={currentIdentity} />
+                </>
+              ) : (
+                <>
+                  <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">
+                    Auto-Delete Settings
+                  </h3>
+                  <AutoDeleteControls 
+                    identity={currentIdentity} 
+                    onIdentityUpdated={handleIdentityUpdated} 
+                    onDownloadData={handleDownloadIdentity} 
+                  />
+                </>
+              )}
+            </div>
+          ) : error ? (
+            <Card className="border-red-300 bg-red-50 dark:bg-red-900/20">
+              <CardContent className="text-center py-8">
+                <p className="text-red-600 dark:text-red-400">{error}</p>
+                <Button 
+                  variant="outline" 
+                  className="mt-4"
+                  onClick={() => clearCurrentIdentity()}
+                >
+                  Try Again
+                </Button>
+              </CardContent>
+            </Card>
+          ) : (
+            <Card className="text-center py-12">
+              <CardContent>
+                <UserIcon className="h-16 w-16 text-gray-400 mx-auto mb-4" />
+                <CardTitle>No Identity Generated Yet</CardTitle>
+                <CardDescription className="mt-2 mb-6">
+                  Click the "Generate New Identity" button to create a temporary identity.
+                </CardDescription>
+                <Button
+                  leftIcon={<UserPlusIcon className="h-5 w-5" />}
+                  onClick={() => generateIdentity()}
+                  isLoading={loading}
+                >
+                  Generate New Identity
+                </Button>
+              </CardContent>
+            </Card>
+          )}
+        </section>
+
+        {/* Google Ad - Middle */}
+        <GoogleAds adPosition="content" className="my-8" />
+
+        {/* Recent identities section */}
+        {showRecent && (
+          <section>
+            {recentIdentities.length > 0 ? (
+              <ResponsiveDataTable 
+                identities={recentIdentities} 
+                title="Recent Identities"
+              />
+            ) : (
+              <Card className="text-center py-8">
+                <CardContent>
+                  <p className="text-gray-500 dark:text-gray-400">
+                    No recent identities found.
+                  </p>
+                </CardContent>
+              </Card>
+            )}
+          </section>
+        )}
       </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
+
+      <footer className="bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 mt-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+          <div className="flex flex-col md:flex-row justify-between items-center">
+            <p className="text-gray-500 dark:text-gray-400 text-sm">
+              © {new Date().getFullYear()} Metchera ID Generator. All rights reserved.
+            </p>
+            <div className="text-gray-500 dark:text-gray-400 text-sm mt-2 md:mt-0">
+              <p className="text-center md:text-right">
+                This service is for educational and testing purposes only.
+              </p>
+            </div>
+          </div>
+        </div>
       </footer>
+
+      {/* Google Ads - Footer Ad */}
+      <div className="fixed bottom-0 inset-x-0 bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700">
+        <GoogleAds adPosition="footer" />
+      </div>
     </div>
   );
 }

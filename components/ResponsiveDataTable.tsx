@@ -1,9 +1,6 @@
 import React, { useState } from 'react';
-import { ArrowUpIcon, ArrowDownIcon, TrashIcon } from '@heroicons/react/24/outline';
 import { Identity } from '../lib/identityGenerator';
-import { formatDate } from '../lib/utils';
 import Button from './ui/Button';
-import { useIdentity } from '../contexts/IdentityContext';
 import IdentityDataTable from './IdentityDataTable';
 import IdentityCard from './IdentityCard';
 

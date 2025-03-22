@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { ArrowUpIcon, ArrowDownIcon, TrashIcon } from '@heroicons/react/24/outline';
 import { Identity } from '../lib/identityGenerator';
 import { formatDate } from '../lib/utils';
-import Button from './ui/Button';
 import { useIdentity } from '../contexts/IdentityContext';
 
 interface IdentityDataTableProps {
@@ -51,12 +50,6 @@ export default function IdentityDataTable({ identities }: IdentityDataTableProps
 
     return sortDirection === 'asc' ? comparison : -comparison;
   });
-
-  const handleDelete = (id: string) => {
-    if (confirm('Are you sure you want to delete this identity?')) {
-      deleteIdentity(id);
-    }
-  };
 
   // Function to render sort indicator
   const SortIndicator = ({ field }: { field: SortField }) => {

@@ -1,6 +1,5 @@
 import { db } from './firebase';
 import { deleteDoc, getDocs, query, where, Timestamp, collection } from 'firebase/firestore';
-import { Identity } from './identityGenerator';
 import toast from 'react-hot-toast';
 
 const IDENTITIES_COLLECTION = 'identities';

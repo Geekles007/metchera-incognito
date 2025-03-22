@@ -3,7 +3,6 @@ import { Identity } from '../../lib/identityGenerator';
 import { formatDate } from '../../lib/utils';
 import { generateQRCodeForIdentity } from '../../lib/qrCodeUtils';
 import LoadingSpinner from '../ui/LoadingSpinner';
-import QRCode from 'react-qr-code';
 
 interface DocumentBaseProps {
   identity: Identity;

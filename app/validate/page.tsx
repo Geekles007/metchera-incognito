@@ -1,18 +1,24 @@
 'use client';
 
 import { useState } from 'react';
-import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { ArrowLeftIcon, CheckCircleIcon, XCircleIcon } from '@heroicons/react/24/outline';
 import { validateQRCode } from '../../lib/qrCodeUtils';
 import Card, { CardContent, CardHeader, CardTitle } from '../../components/ui/Card';
 import Button from '../../components/ui/Button';
 
+interface QRCodeData {
+  id: string;
+  name: string;
+  docType: string;
+  docNumber: string;
+  expires: string; // ISO date string
+}
+
 export default function QRValidationPage() {
-  const router = useRouter();
   const [qrResult, setQrResult] = useState<{
     valid: boolean;
-    data?: any;
+    data?: QRCodeData;
     error?: string;
   } | null>(null);
   const [qrValue, setQrValue] = useState<string>('');
@@ -25,7 +31,7 @@ export default function QRValidationPage() {
     try {
       const result = validateQRCode(qrValue);
       setQrResult(result);
-    } catch (error) {
+    } catch {
       setQrResult({
         valid: false,
         error: 'Failed to process QR code data'

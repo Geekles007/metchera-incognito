@@ -28,7 +28,7 @@ import Button from '../components/ui/Button';
 import Card, { CardContent, CardDescription, CardTitle } from '../components/ui/Card';
 import { useIdentity } from '../contexts/IdentityContext';
 import { downloadIdentityAsJSON } from '../lib/downloadUtils';
-import { DocumentType } from '../lib/identityGenerator';
+import { DocumentType, Identity } from '../lib/identityGenerator';
 
 export default function Home() {
   const { 
@@ -39,7 +39,6 @@ export default function Home() {
     generateIdentity, 
     clearCurrentIdentity,
     isFirestoreConnected,
-    getIdentity,
     updateIdentity
   } = useIdentity();
 
@@ -50,7 +49,7 @@ export default function Home() {
     generateIdentity(documentType);
   };
 
-  const handleIdentityUpdated = (updatedIdentity: any) => {
+  const handleIdentityUpdated = (updatedIdentity: Identity) => {
     // Update the identity in the context
     if (updatedIdentity && updatedIdentity.id === currentIdentity?.id) {
       updateIdentity(updatedIdentity);
@@ -292,7 +291,7 @@ export default function Home() {
                 <UserIcon className="h-16 w-16 text-gray-400 mx-auto mb-4" />
                 <CardTitle>No Identity Generated Yet</CardTitle>
                 <CardDescription className="mt-2 mb-6">
-                  Click the "Generate New Identity" button to create a temporary identity.
+                  Click the &quot;Generate New Identity&quot; button to create a temporary identity.
                 </CardDescription>
                 <Button
                   leftIcon={<UserPlusIcon className="h-5 w-5" />}

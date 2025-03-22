@@ -6,7 +6,6 @@ import Button from './ui/Button';
 import {
   FaClock,
   FaDownload,
-  FaTrash,
   FaExclamationTriangle,
   FaPause,
   FaPlay
@@ -142,7 +141,7 @@ const AutoDeleteControls: React.FC<AutoDeleteControlsProps> = ({
             <FaExclamationTriangle className="w-5 h-5 mr-2 mt-0.5 flex-shrink-0 text-yellow-500" />
             <p className="text-sm">
               When auto-delete is enabled, this identity will be permanently removed after the specified time.
-              Download your data before it's deleted.
+              Download your data before it&apos;s deleted.
             </p>
           </div>
 

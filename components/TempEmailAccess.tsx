@@ -25,7 +25,7 @@ const TempEmailAccess: React.FC<TempEmailAccessProps> = ({ identity }) => {
             <FaInfoCircle className="w-5 h-5 mr-2 mt-0.5 flex-shrink-0" />
             <p className="text-sm">
               This temporary email is fully functional. You can use it for testing and receive actual emails. 
-              The inbox is public, so don't use it for sensitive information.
+              The inbox is public, so don&apos;t use it for sensitive information.
             </p>
           </div>
 
@@ -77,7 +77,7 @@ const TempEmailAccess: React.FC<TempEmailAccessProps> = ({ identity }) => {
           <div className="mt-4 p-4 bg-yellow-50 text-yellow-800 dark:bg-yellow-900/20 dark:text-yellow-200 rounded-lg text-sm">
             <p className="font-semibold mb-1">How to use:</p>
             <ol className="list-decimal pl-5 space-y-1">
-              <li>Click "Access Inbox" to open the temporary mailbox</li>
+              <li>Click &quot;Access Inbox&quot; to open the temporary mailbox</li>
               <li>Use this email address for account registrations</li>
               <li>Return to the inbox to view received messages</li>
               <li>Some providers may require additional steps - follow their instructions</li>

@@ -102,15 +102,23 @@ export function getExpiryDate(identity: Identity): Date | null {
 /**
  * Validate a QR code by decoding the data
  */
+interface QRCodeData {
+  id: string;
+  name: string;
+  docType: string;
+  docNumber: string;
+  expires: string; // ISO date string
+}
+
 export function validateQRCode(qrData: string): { 
   valid: boolean;
-  data?: any;
+  data?: QRCodeData;
   error?: string;
 } {
   try {
     // Decode base64 data
     const decodedData = Buffer.from(qrData, 'base64').toString();
-    const data = JSON.parse(decodedData);
+    const data = JSON.parse(decodedData) as QRCodeData;
     
     // Check required fields
     if (!data.id || !data.name || !data.docType || !data.docNumber) {
@@ -120,7 +128,7 @@ export function validateQRCode(qrData: string): {
     // TODO: In a real application, you would verify against a database here
     
     return { valid: true, data };
-  } catch (error) {
+  } catch {
     return { valid: false, error: 'Invalid QR code data format' };
   }
 } 

@@ -105,7 +105,7 @@ const Passport: React.FC<PassportProps> = ({ identity }) => {
                 </p>
               </div>
               <div>
-                <p className="text-xs text-blue-700 dark:text-blue-300">Date of Expiry / Date d'expiration</p>
+                <p className="text-xs text-blue-700 dark:text-blue-300">Date of Expiry / Date d&apos;expiration</p>
                 <p className="text-base text-blue-900 dark:text-blue-100">
                   {formatDate(passportData.expiryDate)}
                 </p>

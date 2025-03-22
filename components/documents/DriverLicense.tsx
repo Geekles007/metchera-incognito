@@ -16,10 +16,10 @@ const DriverLicense: React.FC<DriverLicenseProps> = ({ identity }) => {
       <Card>
         <div className="p-6 text-center">
           <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
-            Driver's License Data Not Available
+            Driver&apos;s License Data Not Available
           </h3>
           <p className="text-gray-600 dark:text-gray-400">
-            The required data for this driver's license could not be found.
+            The required data for this driver&apos;s license could not be found.
           </p>
         </div>
       </Card>

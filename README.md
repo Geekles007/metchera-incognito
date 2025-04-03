@@ -17,41 +17,6 @@ Metchera Incognito helps you create complete, fictional identities for testing, 
 - **Safe & Private** - All identities are 100% fictional and expire after 7 days
 - **Works Everywhere** - Use on your computer, tablet, or phone
 
-## 🎯 Perfect For
-
-- **Software Developers** - Test your applications with realistic user data
-- **UI/UX Designers** - Fill your prototypes with believable information
-- **QA Testers** - Validate systems with diverse user profiles
-- **Privacy-Conscious Users** - Protect your real identity when signing up for services
-- **Educators** - Demonstrate identity concepts without using real personal data
-
-## 🚀 Getting Started
-
-1. **Visit the website** at [your-deployment-url.com](https://your-deployment-url.com)
-2. **Click "Generate New Identity"** to create your first fictional persona
-3. **Explore the tabs** to see all the details - Identity, Documents, Social Media, Email, and Banking
-4. **Save or share** your generated identity as needed
-5. **Generate as many** as you need!
-
-## 💡 Important Notes
-
-- All generated identities are **100% fictional** - they don't belong to real people
-- Identities automatically delete after 7 days for security
-- Use this tool for legitimate purposes only (testing, education, etc.)
-- No real personal data is used in the generation process
-
-## 🛠️ Self-Hosting Guide
-
-Want to run Metchera Incognito on your own server? Follow these simple steps:
-
-1. **Clone the repository** from GitHub
-2. **Install the dependencies** using npm or yarn
-3. **Set up a Firebase account** for storing identities (or use local storage)
-4. **Configure your environment** by adding your Firebase details
-5. **Start the application** with a simple command
-
-Detailed installation instructions can be found in the [Installation Guide](INSTALLATION.md).
-
 ## 🤝 Contributing
 
 We welcome contributions to make Metchera Incognito even better! Whether it's adding new features, fixing bugs, or improving documentation, your help is appreciated.

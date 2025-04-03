@@ -1,10 +1,10 @@
-# Metchera ID Generator
+# Metchera Incognito
 
 ## Create Realistic Temporary Identities with Ease
 
-Metchera ID Generator helps you create complete, fictional identities for testing, privacy protection, or other legitimate purposes. With just a click, you can generate an entire persona including name, address, contact details, and even a unique avatar!
+Metchera Incognito helps you create complete, fictional identities for testing, privacy protection, or other legitimate purposes. With just a click, you can generate an entire persona including name, address, phone number, and more.
 
-![Metchera ID Generator](https://via.placeholder.com/800x400?text=Metchera+ID+Generator)
+![Metchera Incognito](https://via.placeholder.com/800x400?text=Metchera+Incognito)
 
 ## ✨ What Can You Do With Metchera?
 
@@ -42,7 +42,7 @@ Metchera ID Generator helps you create complete, fictional identities for testin
 
 ## 🛠️ Self-Hosting Guide
 
-Want to run Metchera ID Generator on your own server? Follow these simple steps:
+Want to run Metchera Incognito on your own server? Follow these simple steps:
 
 1. **Clone the repository** from GitHub
 2. **Install the dependencies** using npm or yarn
@@ -54,7 +54,7 @@ Detailed installation instructions can be found in the [Installation Guide](INST
 
 ## 🤝 Contributing
 
-We welcome contributions to make Metchera ID Generator even better! Whether it's adding new features, fixing bugs, or improving documentation, your help is appreciated.
+We welcome contributions to make Metchera Incognito even better! Whether it's adding new features, fixing bugs, or improving documentation, your help is appreciated.
 
 ## 📄 License
 
@@ -62,6 +62,6 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ---
 
-Built with ❤️ by [Your Name]
+Built with ❤️ by Lee Niat
 
-*Metchera ID Generator - Making fictional identities real.*
+*Metchera Incognito - Making fictional identities real.*

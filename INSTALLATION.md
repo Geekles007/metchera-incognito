@@ -1,6 +1,6 @@
-# Installation Guide for Metchera ID Generator
+# Installation Guide for Metchera Incognito
 
-This guide will help you set up your own instance of Metchera ID Generator on your personal computer or server.
+This guide will help you set up your own instance of Metchera Incognito on your personal computer or server.
 
 ## Requirements
 
@@ -25,7 +25,7 @@ You should see a version number like `v18.0.0` or higher.
 
 ## Step 2: Get the Code
 
-There are two ways to get the Metchera ID Generator code:
+There are two ways to get the Metchera Incognito code:
 
 ### Option A: Download the ZIP file
 
@@ -42,8 +42,8 @@ If you're familiar with Git:
 2. Navigate to where you want to store the project
 3. Run the following command:
    ```
-   git clone https://github.com/yourusername/metchera-id-generator.git
-   cd metchera-id-generator
+   git clone https://github.com/yourusername/metchera-incognito.git
+   cd metchera-incognito
    ```
 
 ## Step 3: Install Dependencies
@@ -178,4 +178,4 @@ If you run into any issues, please open an issue on the GitHub repository with d
 
 ---
 
-Enjoy your self-hosted Metchera ID Generator! If you have any questions or feedback, we'd love to hear from you. 
+Enjoy your self-hosted Metchera Incognito! If you have any questions or feedback, we'd love to hear from you. 

@@ -14,7 +14,7 @@ export default function AboutPage() {
           <div className="flex justify-between items-center">
             <div className="flex items-center">
               <Link href="/" className="text-2xl font-bold text-gray-900 dark:text-white">
-                Metchera ID Generator
+                Metchera Incognito
               </Link>
             </div>
             <Link href="/">
@@ -29,17 +29,17 @@ export default function AboutPage() {
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="max-w-3xl mx-auto">
           <h1 className="text-3xl font-extrabold text-gray-900 dark:text-white mb-8 text-center">
-            About Metchera ID Generator
+            About Metchera Incognito
           </h1>
 
           <section className="mb-12">
             <Card>
               <CardHeader>
-                <CardTitle>What is Metchera ID Generator?</CardTitle>
+                <CardTitle>What is Metchera Incognito?</CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-gray-600 dark:text-gray-300 mb-4">
-                  Metchera ID Generator is a service that creates realistic temporary identities with various details, including:
+                  Metchera Incognito is a service that creates realistic temporary identities with various details, including:
                 </p>
                 <ul className="list-disc pl-5 space-y-2 text-gray-600 dark:text-gray-300">
                   <li>Full names (first name and surname)</li>
@@ -117,7 +117,7 @@ export default function AboutPage() {
               </CardHeader>
               <CardContent>
                 <p className="text-gray-600 dark:text-gray-300 mb-4">
-                  Metchera ID Generator uses advanced algorithms to create realistic but entirely fictional identities:
+                  Metchera Incognito uses advanced algorithms to create realistic but entirely fictional identities:
                 </p>
                 <ol className="list-decimal pl-5 space-y-3 text-gray-600 dark:text-gray-300">
                   <li>
@@ -151,7 +151,7 @@ export default function AboutPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <p className="text-gray-500 dark:text-gray-400 text-sm">
-              © {new Date().getFullYear()} Metchera ID Generator. All rights reserved.
+              © {new Date().getFullYear()} Metchera Incognito. All rights reserved.
             </p>
             <div className="text-gray-500 dark:text-gray-400 text-sm mt-2 md:mt-0">
               <p className="text-center md:text-right">

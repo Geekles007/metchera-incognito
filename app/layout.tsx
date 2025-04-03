@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Metchera ID Generator - Create Temporary Identities",
+  title: "Metchera Incognito - Create Temporary Identities",
   description: "Generate realistic temporary identities with details like name, address, phone number, temporary email, and an AI-generated avatar.",
   keywords: "identity generator, fake identity, temporary email, privacy tool, testing data",
 };

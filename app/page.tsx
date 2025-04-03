@@ -71,7 +71,7 @@ export default function Home() {
           <div className="flex justify-between items-center">
             <div className="flex items-center">
               <UserIcon className="h-8 w-8 text-primary mr-3" />
-              <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Metchera ID Generator</h1>
+              <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Metchera Incognito</h1>
             </div>
             <div className="flex items-center space-x-4">
               <Link href="/validate">
@@ -333,7 +333,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <p className="text-gray-500 dark:text-gray-400 text-sm">
-              © {new Date().getFullYear()} Metchera ID Generator. All rights reserved.
+              © {new Date().getFullYear()} Metchera Incognito. All rights reserved.
             </p>
             <div className="text-gray-500 dark:text-gray-400 text-sm mt-2 md:mt-0">
               <p className="text-center md:text-right">
